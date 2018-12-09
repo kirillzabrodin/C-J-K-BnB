@@ -1,0 +1,58 @@
+<head>
+  <meta charset='UTF-8'>
+  <title>C-J-K-BnB</title>
+</head>
+<body>
+  <span hidden id='userId'><%= user._id%></span>
+  <span hidden id='userName'><%= user.name%></span>
+  <span hidden id='userEmail'><%= user.email%></span>
+  <span hidden id='userPassword'><%= user.password%></span>
+
+  <h1> C-J-K-BnB </h1>
+
+
+  <div id='signUpIn'>
+  <button class="btn" id='signUp'>Sign Up</button>
+  <button class="btn" id='signIn'>Sign In</button>
+  <div id='signUpForm' hidden>
+    <h3> Sign up to C-J-K-BnB </h3>
+    <label>
+     <input placeholder="Name" id='signUpName' type='text'/></label>
+     <label>
+     <input placeholder="E-mail" id='signUpEmail' type='text'/></label>
+     <label>
+     <input placeholder="Password" id='signUpPassword' type='password'/></label>
+    <button class="btn" id ='signUpSubmit'>Submit</button><br>
+  </div>
+  <div id='signInForm' hidden>
+    <h3> Sign in to C-J-K-BnB </h3>
+    <label>
+      <input placeholder="E-mail" id='signInEmail' type='text'/></label>
+    <label>
+      <input placeholder="Password" id='signInPassword' type='password'/></label>
+    <button class="btn" id ='signInSubmit'>Submit</button><br>
+  </div>
+  </div>
+
+  <div id='logOut' hidden>
+    <button id='logOutButton'>Log Out</button>
+  </div>
+
+
+
+  <div>
+  <button class="btn" id='createListingBtn' hidden>Post a Listing!</button>
+  <div id='createListingForm' hidden>
+    Name: <input id='spaceName' type='text'/><br>
+    Description: <input id='spaceDescription' type='text'/><br>
+    Price: <input id='spacePrice' type='text'/><br>
+    <button class="btn" id='createListingSubmit'>Submit</button><br>
+  </div>
+  </div>
+
+  <div id='allListings'></div>
+
+  <script src='jquery.js'></script>
+  <script src='APIConnector.js'></script>
+  <script src='interface.js'></script>
+</body>

@@ -3,7 +3,7 @@ var userSchema = require('./schemas/users')
 
 function Connection(mongoose, schemas) {
   this.mongoose = mongoose;
-  this.schemas = schemas; // looks like [{name:'user', schema:schema], ['listings', listingSchema]]
+  this.schemas = schemas; // looks like [{name:'user', schema:schema], ['spaces', spaceSchema]]
   this.models = {};
   this.compileSchemas();
   this.connect();

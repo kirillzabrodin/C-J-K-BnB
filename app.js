@@ -1,13 +1,18 @@
 var express = require('express');
+var bodyParser = require('body-parser');
+var path = require('path');
+var session = require('express-session')
 var app = express();
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+app.use(bodyParser.json());
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.set('views', __dirname + '/pages');
-app.set('view engine', 'jsx');
-app.engine('jsx', require('express-react-views').createEngine());
+app.use(express.static(path.join(__dirname, 'src')));
 
-app.listen(3000, () => console.log(`C-J-K-BnB listening on port 3000!`))
+app.use(session({
+  secret: "test"
+}))
+
+var router = require('./router.js');
+app.use('/', router);
+
+module.exports = app;

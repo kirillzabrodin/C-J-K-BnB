@@ -1,11 +1,11 @@
-let rootURL = 'http://localhost:3000'
+let rootURL = 'http://localhost:5000'
 
 let apiCon = new APIConnector(jQuery, rootURL)
-let useHan = new UserHandler(apiCon)
-let listHand = new ListingHandler(apiCon)
-let bookHand = new BookingHandler(apiCon)
+let userHandler = new userConnection(apiCon)
+let spaceHandler = new spaceConnection(apiCon)
 
 $(document).ready(function() {
+  console.log("Hi")
   $('#signUp').click(function() {
     $('#signUpForm').show()
     $('#signInForm').hide()
@@ -24,7 +24,7 @@ $(document).ready(function() {
     let name = $('#signUpName').val()
     let email = $('#signUpEmail').val()
     let password = $('#signUpPassword').val()
-    useHan.sendNewUser(name, email, password)
+    userHandler.sendNewUser(name, email, password)
     login(email, password)
   })
 
@@ -41,7 +41,7 @@ $(document).ready(function() {
     $('#signUp').show()
     $('#signInForm').hide()
     $('.btn').hide()
-    $('#createListingBtn').hide()
+    $('#createSpaceBtn').hide()
     $.ajax({
       url: '/',
       type: 'POST',
@@ -49,69 +49,67 @@ $(document).ready(function() {
       data: null
     })
   })
+  //
+  // $('#createSpaceBtn').click(function() {
+  //   $('#createSpaceForm').show()
+  // })
+  //
+  // $('#createSpaceSubmit').click(function() {
+  //   let address = $('#spaceAddress').val()
+  //   let noBeds = parseInt($('#spaceNoBeds').val())
+  //   let userId = $('#userId').val()
+  //   spaceHandler.createNewSpace(address, userId, noBeds)
+  //   setTimeout(function() {
+  //     updateSpace()} , 500)
+  // })
 
-  $('#createListingBtn').click(function() {
-    $('#createListingForm').show()
-  })
-
-  $('#createListingSubmit').click(function() {
-    let address = $('#listingAddress').val()
-    let noBeds = parseInt($('#listingNoBeds').val())
-    let userId = $('#userId').val()
-    listHand.createNewListing(address, userId, noBeds)
-    setTimeout(function() {
-      updateListing()} , 500)
-  })
-
-  updateListing()
-
-  $(".bookingbtn").click(function() {
-    let listingId = this.id
-    let bookerId = $('#userId').val()
-    console.log(listingId, bookerId)
-    let today = new Date()
-    let nextWeek = today + 7
-    bookHand.createNewBooking(listingId, bookerId, today, nextWeek)
-  })
+  // updateSpace()
+  //
+  // $(".bookingbtn").click(function() {
+  //   let spaceId = this.id
+  //   let bookerId = $('#userId').val()
+  //   console.log(spaceId, bookerId)
+  //   let today = new Date()
+  //   let nextWeek = today + 7
+  //   bookHand.createNewBooking(spaceId, bookerId, today, nextWeek)
+  // })
 
 
-  //shoud we wait until login to trigger query listings?
+  //shoud we wait until login to trigger query spaces?
 })
 
-var updateListing = function() {
-  $('#allListings').empty()
-  listHand.queryListings().then(function(res) {
-    for (var i = 0; i < res.length; i += 1){
-      let bedImg = "<img class=svgBed src='/stylesheets/images/bed.svg'  />"
+var updateSpace = function() {
+  $('#allSpaces').empty()
+  spaceHandler.querySpaces().then(function(res) {
+    for (var i = 0; i < res.length; i ++){
       let id = res[i]._id;
-      let bookingId = "book" + id;
-      let address = "<li> "+ res[i].address + "</li>"
-
-      let beds = "<li class=bedCount> "+ res[i].no_beds + bedImg + "</li>"
+      let name = res[i].name;
+      let owner = res[i].owner;
+      let description = res[i].description;
       let bookButton = "<button id=" + bookingId + " class=bookingbtn hidden>Book now!</button>"
-      $('#allListings').append("<div class=listItem id=" + id + ">"
-      + address
-      + beds
-      + bookButton
+      $('#allSpaces').append("<div class=listItem id=" + id + ">"
+      + name
+      + owner
+      + description
       +"</div>");
     }
   })
 }
 
-var login = function(email, password) {
-  useHan.isLoginCorrect(email, password).then(function(res) {
-    if (res !== false) {
-      $.ajax({
-        url: '/',
-        type: 'POST',
-        contentType: 'application/json',
-        data: JSON.stringify(res)
-      })
-      $('#createListingBtn').show()
-      $('.bookingbtn').show()
-      $('#signUpIn').hide()
-      $('#logOut').show()
-    } else {
-    }
-  })
-}
+// var login = function(email, password) {
+//   userHandler.isLoginCorrect(email, password).then(function(res) {
+//     if (res !== false) {
+//       $.ajax({
+//         url: '/',
+//         type: 'POST',
+//         contentType: 'application/json',
+//         data: JSON.stringify(res)
+//       })
+//       $('#createSpaceBtn').show()
+//       $('.bookingbtn').show()
+//       $('#signUpIn').hide()
+//       $('#logOut').show()
+//     } else {
+//     }
+//   })
+// }
