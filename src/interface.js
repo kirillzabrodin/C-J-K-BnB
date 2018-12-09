@@ -1,16 +1,16 @@
 let rootURL = 'http://localhost:5000'
 
-let apiCon = new APIConnector(jQuery, rootURL)
-let userHandler = new userConnection(apiCon)
-let spaceHandler = new spaceConnection(apiCon)
+let apiCon = new APIConnector(jQuery, rootURL);
+let userHandler = new UserHandler(apiCon)
+let spaceHandler = new SpaceHandler(apiCon);
 
 $(document).ready(function() {
-  console.log("Hi")
   $('#signUp').click(function() {
     $('#signUpForm').show()
     $('#signInForm').hide()
     $('#signUp').hide()
     $('#signIn').show()
+    updateSpace()
   })
 
   $('#signIn').click(function() {
@@ -49,33 +49,33 @@ $(document).ready(function() {
       data: null
     })
   })
-  //
-  // $('#createSpaceBtn').click(function() {
-  //   $('#createSpaceForm').show()
-  // })
-  //
-  // $('#createSpaceSubmit').click(function() {
-  //   let address = $('#spaceAddress').val()
-  //   let noBeds = parseInt($('#spaceNoBeds').val())
-  //   let userId = $('#userId').val()
-  //   spaceHandler.createNewSpace(address, userId, noBeds)
-  //   setTimeout(function() {
-  //     updateSpace()} , 500)
-  // })
 
-  // updateSpace()
-  //
-  // $(".bookingbtn").click(function() {
-  //   let spaceId = this.id
-  //   let bookerId = $('#userId').val()
-  //   console.log(spaceId, bookerId)
-  //   let today = new Date()
-  //   let nextWeek = today + 7
-  //   bookHand.createNewBooking(spaceId, bookerId, today, nextWeek)
-  // })
+  $('#createSpaceBtn').click(function() {
+    $('#createSpaceForm').show()
+  })
+
+  $('#createSpaceSubmit').click(function() {
+    let address = $('#spaceAddress').val()
+    let noBeds = parseInt($('#spaceNoBeds').val())
+    let userId = $('#userId').val()
+    spaceHandler.createNewSpace(address, userId, noBeds)
+    setTimeout(function() {
+      updateSpace()} , 500)
+  })
+
+  updateSpace()
+
+  $(".bookingbtn").click(function() {
+    let spaceId = this.id
+    let bookerId = $('#userId').val()
+    console.log(spaceId, bookerId)
+    let today = new Date()
+    let nextWeek = today + 7
+    bookHand.createNewBooking(spaceId, bookerId, today, nextWeek)
+  })
 
 
-  //shoud we wait until login to trigger query spaces?
+  // shoud we wait until login to trigger query spaces?
 })
 
 var updateSpace = function() {
@@ -86,30 +86,13 @@ var updateSpace = function() {
       let name = res[i].name;
       let owner = res[i].owner;
       let description = res[i].description;
-      let bookButton = "<button id=" + bookingId + " class=bookingbtn hidden>Book now!</button>"
-      $('#allSpaces').append("<div class=listItem id=" + id + ">"
-      + name
-      + owner
-      + description
-      +"</div>");
+      let bookButton = "<button id=" + id + " class=bookingbtn hidden>Book now!</button>"
+      let spaceInfo = "<div class=spaceItem id=" + id + ">"
+      + "<h1>Name: " + name + "</br"
+      + "<br><h1>Owner:</h1>" + owner
+      + "<br>" + description
+      +"</div>"
+      $('#allSpaces').append(spaceInfo);
     }
   })
 }
-
-// var login = function(email, password) {
-//   userHandler.isLoginCorrect(email, password).then(function(res) {
-//     if (res !== false) {
-//       $.ajax({
-//         url: '/',
-//         type: 'POST',
-//         contentType: 'application/json',
-//         data: JSON.stringify(res)
-//       })
-//       $('#createSpaceBtn').show()
-//       $('.bookingbtn').show()
-//       $('#signUpIn').hide()
-//       $('#logOut').show()
-//     } else {
-//     }
-//   })
-// }

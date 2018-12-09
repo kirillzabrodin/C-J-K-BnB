@@ -1,4 +1,4 @@
-function SpaceHandler(apiConnector) {
+function SpaceHandler (apiConnector) {
   this.apiConnector = apiConnector;
 }
 
@@ -25,4 +25,4 @@ SpaceHandler.prototype.queryOwnSpaces = function(owner_id) {
     })
 }
 
-module.exports = SpaceHandler;
+window.SpaceHandler = SpaceHandler;

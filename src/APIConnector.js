@@ -1,6 +1,6 @@
-const APIConnector = function(jquery, rootURL) {
-  this.jquery = jquery
-  this.rootURL = rootURL
+function APIConnector (jquery, rootURL) {
+  this.jquery = jquery;
+  this.rootURL = rootURL;
 }
 
 APIConnector.prototype.connect = function(action, path, params = false) {
@@ -21,4 +21,4 @@ APIConnector.prototype.connect = function(action, path, params = false) {
   }
 }
 
-module.exports = APIConnector;
+window.APIConnector = APIConnector;
