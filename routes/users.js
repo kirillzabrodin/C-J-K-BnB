@@ -18,7 +18,6 @@ router.post('/new', (req, res) => {
     });
 
     newUser.save().then(user => res.json(user));
-    // console.log(user);
 });
 
 // GET log in page
