@@ -17,6 +17,11 @@
   },
   "homepage": "https://github.com/kirillzabrodin/C-J-K-BnB#readme",
   "dependencies": {
-    "express": "^4.16.4"
+    "express": "^4.16.4",
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3",
+    "reactstrap": "^6.5.0",
+    "bootstrap": "^4.1.3",
+    "mongoose": "^5.3.14"
   }
 }
