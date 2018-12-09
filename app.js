@@ -5,6 +5,7 @@ var bodyParser = require('body-parser');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var spacesRouter = require('./routes/spaces');
 
 var app = express();
 
@@ -17,10 +18,13 @@ app.use(session({
 }))
 
 mongoose.connect("mongodb://james:mousehouse12@ds249873.mlab.com:49873/kirills_bnb", { useNewUrlParser: true })
- .then(() => console.log('connected to db...'));
- .catch(err => console.log(err));
+    .then(() => console.log('MongoDB connected...'))
+    .catch(err => console.log(err));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/spaces', spacesRouter);
 
-app.listen(3000, () => console.log(`C-J-K-BnB listening on port 3000!`))
+app.listen(5000, () => console.log(`C-J-K-BnB listening on port 5000!`))
+
+module.exports = app;
