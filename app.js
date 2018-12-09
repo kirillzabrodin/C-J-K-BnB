@@ -1,12 +1,17 @@
 var express = require('express');
-var port = 3000
 var app = express();
+var session = require('express-session');
 
 var indexRouter = require('./routes/index');
-var loginRouter = require('./routes/login');
-var signupRouter = require('./routes/signup');
+var usersRouter = require('./routes/users');
+
+app.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: true
+}))
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
-app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+app.listen(3000, () => console.log(`C-J-K-BnB listening on port 3000!`))
