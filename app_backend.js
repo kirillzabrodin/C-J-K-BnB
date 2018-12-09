@@ -8,7 +8,7 @@ var app = express();
 
 app.use(bodyParser.json());
 
-mongoose.connect("mongodb://james:mousehouse12@ds249873.mlab.com:49873/kirills_bnb", { useNewUrlParser: true })
+mongoose.connect("mongodb://" + process.env.MLAB_USERNAME + ":" + process.env.MLAB_PASSWORD + "@ds249873.mlab.com:49873/kirills_bnb", { useNewUrlParser: true })
     .then(() => console.log('MongoDB connected...'))
     .catch(err => console.log(err));
 
