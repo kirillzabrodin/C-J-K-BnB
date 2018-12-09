@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-var listingSchema = new Schema({
+var spaceSchema = new Schema({
   {
     name: {type: String},
     owner: {type: Schema.Types.ObjectId, ref: 'user', required: true},
