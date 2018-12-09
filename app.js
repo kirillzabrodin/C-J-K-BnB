@@ -6,6 +6,7 @@ var bodyParser = require('body-parser');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var spacesRouter = require('./routes/spaces');
+var router = require('./router.js');
 
 var app = express();
 
@@ -17,11 +18,13 @@ app.use(session({
   saveUninitialized: true
 }))
 
+app.use(express.static(path.join(__dirname, 'src')));
+
 mongoose.connect("mongodb://james:mousehouse12@ds249873.mlab.com:49873/kirills_bnb", { useNewUrlParser: true })
     .then(() => console.log('MongoDB connected...'))
     .catch(err => console.log(err));
 
-app.use('/', indexRouter);
+app.use('/', router);
 app.use('/users', usersRouter);
 app.use('/spaces', spacesRouter);
 
