@@ -3,7 +3,7 @@ function UserHandler(apiConnector) {
 };
 
 UserHandler.prototype.sendNewUser = function(name, email, password) {
-  this.apiConnector.connect('post', '/users', {name: name, email: email,
+  this.apiConnector.connect('post', '/users/new', {name: name, email: email,
   password: password})
 
 };

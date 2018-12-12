@@ -12,7 +12,6 @@ router.get('/', (req, res) => {
 router.post('/new', (req, res) => {
     var newUser= new User({
         name: req.body.name,
-        username: req.body.username,
         email: req.body.email,
         password: req.body.password
     });
