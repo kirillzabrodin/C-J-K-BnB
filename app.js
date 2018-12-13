@@ -12,6 +12,7 @@ app.use(session({
 }))
 
 app.use(express.static(path.join(__dirname, 'src')));
+app.set('view engine', 'ejs');
 
 app.use('/', router);
 
